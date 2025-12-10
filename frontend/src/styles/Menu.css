@@ -1,0 +1,169 @@
+/* HERO SECTION */
+.main {
+  font-family: Arial, sans-serif;
+}
+
+.center {
+  text-align: center;
+  padding: 80px 20px;
+  background: #111;
+  color: white;
+}
+
+.center h1 {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+.center p {
+  color: #ccc;
+  line-height: 1.6;
+}
+
+#btn {
+  margin-top: 20px;
+  padding: 12px 30px;
+  background: #ff9600;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#btn:hover {
+  background: #e68400;
+}
+
+/* HERO IMAGE */
+.image {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+}
+
+/* SERVICES */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 60px 20px;
+}
+
+.card {
+  width: 230px;
+  padding: 25px;
+  background: #f9f9f9;
+  text-align: center;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* ABOUT */
+.About-Container {
+  display: flex;
+  gap: 40px;
+  padding: 60px 40px;
+  flex-wrap: wrap;
+}
+
+.name {
+  flex: 1;
+}
+
+.name h1 {
+  margin: 10px 0;
+}
+
+.btn {
+  padding: 10px 25px;
+  background: #ff9600;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.c-image {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.c-image img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* RESERVATION */
+.container-Book {
+  display: flex;
+  gap: 30px;
+  padding: 60px 40px;
+  flex-wrap: wrap;
+}
+
+#im {
+  width: 45%;
+  border-radius: 10px;
+}
+
+.book {
+  flex: 1;
+}
+
+.book input,
+.book textarea {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+}
+
+.book button {
+  padding: 10px;
+  background: black;
+  color: white;
+  border: none;
+}
+
+/* TEAM */
+.container-team {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.team-card {
+  display: inline-block;
+  margin: 15px;
+}
+
+.T {
+  width: 220px;
+  border-radius: 10px;
+}
+
+/* TESTIMONIAL */
+.container-test {
+  padding: 60px 20px;
+  background: #111;
+  color: white;
+  text-align: center;
+}
+
+.client img {
+  margin-top: 15px;
+  border-radius: 50%;
+}
+
+/* LOADING */
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+}

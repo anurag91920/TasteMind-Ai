@@ -44,7 +44,7 @@ export default function Forecast() {
           </p>
         ) : (
           <p>
-            ✅ Normal demand. Keep regular staff and avoid over-stocking.
+             Normal demand. Keep regular staff and avoid over-stocking.
           </p>
         )}
       </div>

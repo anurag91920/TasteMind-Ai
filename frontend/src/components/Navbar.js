@@ -33,7 +33,7 @@ export default function Navbar() {
       <h2>🍽️ TASTEMIND AI</h2>
 
       <div>
-        <Link to="/" style={{ margin: "0 10px" }}>Menu</Link>
+        <Link to="/" style={{ margin: "0 10px" }}>Home</Link>
         <Link to="/recommend" style={{ margin: "0 10px" }}>AI Recommend</Link>
         <Link to="/forecast" style={{ margin: "0 10px" }}>AI Forecast</Link>
 

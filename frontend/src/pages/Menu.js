@@ -1,138 +1,131 @@
 import React, { useEffect, useState } from "react";
 import API from "../services/api";
+import "../styles/Menu.css";
+
+
+//  IMPORT IMAGES (mandatory in React)
+import banner from "../Assets/4a.png";
+import a from "../Assets/4b.png";
+import b from "../Assets/4c.png";
+import c from "../Assets/4d.png";
+import d from "../Assets/4e.png";
+import bookImg from "../Assets/4f.png";
+import chef1 from "../Assets/5a.png";
+import chef2 from "../Assets/5b.png";
+import chef3 from "../Assets/5c.png";
+import chef4 from "../Assets/5d.png";
+import client from "../Assets/5e.png";
 
 export default function Menu() {
   const [items, setItems] = useState([]);
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("all");
   const [loading, setLoading] = useState(true);
 
+  //  Safe API call
   const load = async () => {
-    setLoading(true);
-    const res = await API.get("/menu");
-    setItems(res.data);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const res = await API.get("/menu");
+      setItems(Array.isArray(res.data) ? res.data : []);
+    } catch (err) {
+      console.error("Menu API failed:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     load();
   }, []);
 
-  const categories = [
-    "all",
-    ...new Set(items.map((i) => i.category).filter(Boolean)),
-  ];
-
-  const filteredItems = items.filter((m) => {
-    const matchSearch = m.name.toLowerCase().includes(search.toLowerCase());
-    const matchCategory =
-      category === "all" || m.category === category;
-    return matchSearch && matchCategory;
-  });
-
   return (
-    <div className="page">
-      <h1>🍽️ TasteMind Menu</h1>
-      <p style={{ opacity: 0.7 }}>
-        Discover dishes curated with TasteMind AI insights
-      </p>
+    <div className="main">
+      {/* HERO */}
+      {/* <div className="center">
+        <h1>Enjoy Our Delicious Meal</h1>
+        <p>
+          Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit.  
+          Aliqu diam amet diam et eos.
+        </p>
+        <button id="btn">BOOK A TABLE</button>
+      </div> */}
+      <img className="image" src={banner} alt="banner" />
 
-      {/* Search & Filter */}
-      <div
-        style={{
-          display: "flex",
-          gap: 12,
-          flexWrap: "wrap",
-          margin: "20px 0",
-        }}
-      >
-        <input
-          type="text"
-          placeholder="🔍 Search dishes…"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          style={{ padding: 8, flex: 1, minWidth: 220 }}
-        />
-
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          style={{ padding: 8 }}
-        >
-          {categories.map((c) => (
-            <option key={c} value={c}>
-              {c === "all" ? "All Categories" : c}
-            </option>
-          ))}
-        </select>
+      {/* SERVICES */}
+      <div className="container">
+        <div className="card">
+          <h2>Master Chefs</h2>
+          <p>Professional & experienced chefs</p>
+        </div>
+        <div className="card">
+          <h2>Quality Food</h2>
+          <p>Fresh & delicious ingredients</p>
+        </div>
+        <div className="card">
+          <h2>Online Order</h2>
+          <p>Fast & easy ordering</p>
+        </div>
+        <div className="card">
+          <h2>24/7 Service</h2>
+          <p>Always open for you</p>
+        </div>
       </div>
 
-      {/* Content */}
-      {loading ? (
-        <p>Loading menu…</p>
-      ) : filteredItems.length === 0 ? (
-        <p>No items found.</p>
-      ) : (
-        <div className="grid">
-          {filteredItems.map((m) => (
-            <div key={m.id} className="card">
-              {/* Badge */}
-              {m.price > 300 && (
-                <span
-                  style={{
-                    fontSize: 12,
-                    color: "#fff",
-                    background: "#ff5722",
-                    padding: "2px 6px",
-                    borderRadius: 4,
-                    float: "right",
-                  }}
-                >
-                  Chef’s Special
-                </span>
-              )}
-
-              <h3>{m.name}</h3>
-
-              <p style={{ fontSize: 13, color: "#666" }}>
-                {m.category}
-              </p>
-
-              <p style={{ fontWeight: "bold", fontSize: 18 }}>
-                ₹{m.price}
-              </p>
-
-              <p style={{ fontSize: 14, opacity: 0.85 }}>
-                {m.description}
-              </p>
-
-              <button
-                style={{
-                  marginTop: 10,
-                  padding: "6px 12px",
-                  background: "#2e7d32",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: 6,
-                  cursor: "pointer",
-                }}
-              >
-                Add to Order
-              </button>
-            </div>
-          ))}
+      {/* ABOUT */}
+      <div className="About-Container">
+        <div className="name">
+          <h2>About Us</h2>
+          <h1>Welcome to Restoran</h1>
+          <p>We serve the best food in town.</p>
+          <button className="btn">READ MORE</button>
         </div>
-      )}
 
-      <p
-        style={{
-          marginTop: 25,
-          fontStyle: "italic",
-          opacity: 0.6,
-        }}
-      >
-        Powered by TasteMind AI • Smart menus for modern restaurants
-      </p>
+        <div className="c-image">
+          <img src={a} alt="about" />
+          <img src={b} alt="about" />
+          <img src={c} alt="about" />
+          <img src={d} alt="about" />
+        </div>
+      </div>
+
+      {/* RESERVATION */}
+      <div className="container-Book">
+        <img id="im" src={bookImg} alt="reservation" />
+        <div className="book">
+          <h2>Reservation</h2>
+          <h1>Book A Table Online</h1>
+          <form>
+            <input placeholder="Name" />
+            <input placeholder="Email" />
+            <textarea placeholder="Message" />
+            <button>Send</button>
+          </form>
+        </div>
+      </div>
+
+      {/* TEAM */}
+      <div className="container-team">
+        <h1>Our Master Chefs</h1>
+        {[chef1, chef2, chef3, chef4].map((img, i) => (
+          <div className="team-card" key={i}>
+            <img src={img} className="T" alt="chef" />
+            <h2>Chef Name</h2>
+            <p>Designation</p>
+          </div>
+        ))}
+      </div>
+
+      {/* TESTIMONIAL */}
+      <div className="container-test">
+        <h1>Our Clients Say</h1>
+        <div className="client">
+          <p>Best restaurant experience ever!</p>
+          <img src={client} className="S" alt="client" />
+          <h2>Client Name</h2>
+        </div>
+      </div>
+
+      {/* ✅ LOADING STATE */}
+      {loading && <p style={{ textAlign: "center" }}>Loading menu...</p>}
     </div>
   );
 }
