@@ -32,6 +32,16 @@ app.get("/", (req, res) => {
   res.send("Server is running ");
 });
 
+//  ADD THIS
+app.get("/test-db", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT 1");
+    res.json({ success: true, message: "DB Connected!" });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 app.listen(process.env.PORT, () =>
   console.log(`Server running on port ${process.env.PORT}`)
 );
