@@ -2,7 +2,23 @@ import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 
 dotenv.config();
-export const db = mysql.createPool(process.env.DATABASE_URL);
+
+export const db = mysql.createPool({
+  uri: process.env.DATABASE_URL,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+});
+
+// Optional test (non-blocking)
+db.getConnection()
+  .then(conn => {
+    console.log(" MySQL Connected");
+    conn.release();
+  })
+  .catch(err => {
+    console.error("MySQL Connection Failed:", err.message);
+  });
 
 
 
@@ -10,14 +26,12 @@ export const db = mysql.createPool(process.env.DATABASE_URL);
 
 
 
-
-
-
-
-// import mysql from "mysql2/promise";
 // import dotenv from "dotenv";
 
 // dotenv.config();
+
+// import mysql from "mysql2/promise";
+
 
 // const isProd = process.env.NODE_ENV === "production";
 

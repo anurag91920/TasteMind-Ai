@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { db } from "./config/db.js";   // <<--- ADD THIS
+import { db } from "./config/db.js";
 
 import authRoutes from "./routes/auth.routes.js";
 import menuRoutes from "./routes/menu.routes.js";
@@ -11,15 +11,15 @@ import mlRoutes from "./routes/ml.routes.js";
 
 dotenv.config();
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: [process.env.CLIENT_URL],   // ← array me rakho
+    origin: process.env.CLIENT_URL ? [process.env.CLIENT_URL] : true,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
+    credentials: true,
   })
 );
-
 
 app.use(express.json());
 
@@ -33,16 +33,15 @@ app.get("/", (req, res) => {
   res.send("Server is running ");
 });
 
-//  ADD THIS
 app.get("/test-db", async (req, res) => {
   try {
-    const [rows] = await db.query("SELECT 1");
+    await db.query("SELECT 1");
     res.json({ success: true, message: "DB Connected!" });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
 });
 
-app.listen(process.env.PORT, () =>
-  console.log(`Server running on port ${process.env.PORT}`)
-);
+app.listen(PORT, () => {
+  console.log(` Server running on port ${PORT}`);
+});
