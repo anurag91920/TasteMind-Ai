@@ -3,18 +3,26 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-
 const isProd = process.env.NODE_ENV === "production";
 
 export const db = await mysql.createPool({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    ssl: isProd
-      ? {
-          rejectUnauthorized: false, 
-       }
-     : false,
- });
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  ssl: isProd
+    ? {
+        rejectUnauthorized: false,
+      }
+    : false,
+});
+
+/*  TEST CONNECTION ON STARTUP */
+try {
+  const connection = await db.getConnection();
+  console.log(" MySQL Database connected successfully");
+  connection.release();
+} catch (error) {
+  console.error(" MySQL Database connection failed:", error.message);
+}

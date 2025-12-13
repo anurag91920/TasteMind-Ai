@@ -54,7 +54,7 @@ export default function Orders() {
                 fontSize: 12,
               }}
             >
-              ✅ Placed
+              Placed
             </span>
 
             <p>

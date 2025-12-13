@@ -17,15 +17,13 @@ import chef4 from "../Assets/5d.png";
 import client from "../Assets/5e.png";
 
 export default function Menu() {
-  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   //  Safe API call
   const load = async () => {
     try {
       setLoading(true);
-      const res = await API.get("/menu");
-      setItems(Array.isArray(res.data) ? res.data : []);
+      await API.get("/api/menu");
     } catch (err) {
       console.error("Menu API failed:", err);
     } finally {
@@ -124,7 +122,7 @@ export default function Menu() {
         </div>
       </div>
 
-      {/* ✅ LOADING STATE */}
+      {/*  LOADING STATE */}
       {loading && <p style={{ textAlign: "center" }}>Loading menu...</p>}
     </div>
   );
