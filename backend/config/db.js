@@ -1,8 +1,7 @@
+import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 
 dotenv.config();
-
-import mysql from "mysql2/promise";
 
 
 const isProd = process.env.NODE_ENV === "production";
